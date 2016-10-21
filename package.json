@@ -27,6 +27,8 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
     "gulp-nodemon": "^2.2.1"
   }
 }

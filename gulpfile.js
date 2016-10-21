@@ -7,26 +7,25 @@ let gulp 		= require('gulp'),
   watch 		= require('gulp-watch'),
   nodemon   = require('gulp-nodemon');
 
-watch(['./frontend/*.js',
-  './gulpfile.js'], () => {
+watch(['./frontend/*.js'], () => {
   console.log('Client-side code/style modified; re-compiling.')
   gulp.start('precompile')
 });
 
 gulp.task('precompile', () => {
-  return browserify('./src/app.js')
+  return browserify('./frontend/app.js')
     .transform('babelify', {presets: ['es2015']})
     .bundle()
-    .pipe(source('app.js'))
-    .pipe(gulp.dest('./dist/public/js/'))
+    .pipe(source('app-build.js'))
+    .pipe(gulp.dest('./public/javascripts/'))
 });
 
 gulp.task('server', () => {
   nodemon({
-    script: 'app.js'
-    , ext: 'js hbs scss sql'
-    , env: { 'NODE_ENV': 'development' }
+    script: './bin/www',
+    ext: 'js hbs scss sql'
+    // , env: { 'NODE_ENV': 'development' }
   })
 });
 
-gulp.task('default', ['server']);
+gulp.task('default', ['precompile', 'server']);
