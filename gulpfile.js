@@ -2,12 +2,12 @@
 
 require('dotenv').config();
 
-let gulp 		    = require('gulp'),
-    browserify 	= require('browserify'),
-    babelify 	  = require('babelify'),
-    source 		  = require('vinyl-source-stream'),
-    watch 		  = require('gulp-watch'),
-    nodemon     = require('gulp-nodemon');
+let gulp  = require('gulp'),
+    browserify  = require('browserify'),
+    babelify  = require('babelify'),
+    source  = require('vinyl-source-stream'),
+    watch = require('gulp-watch'),
+    nodemon = require('gulp-nodemon');
 
 
 /*
