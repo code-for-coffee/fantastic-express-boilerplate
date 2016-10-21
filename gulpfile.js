@@ -12,10 +12,9 @@ let gulp 		    = require('gulp'),
 const db = require('knex')({
   client: 'mysql',
   connection: {
-    host : 'localhost',
-    user : 'l33tdba',
-    password : 'w0rk5pac3',
-    database : 'first_run'
+    host : process.env.DB_HOST,
+    user : process.env.DB_USR,
+    password : process.env.DB_PW
   }
 });
 
