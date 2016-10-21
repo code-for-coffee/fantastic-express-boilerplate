@@ -28,7 +28,6 @@ const db = require('knex')({
   }
 });
 
-
 const DB_CREATE_ROLES_TABLE_QUERY = "create table user_roles (" +
   "id int not null auto_increment," +
   "name varchar(80) not null," +
@@ -44,6 +43,8 @@ const DB_CREATE_USERS_TABLE_QUERY = "create table user_accounts (" +
   "role int not null references user_roles(id)," +
   "primary key (id)" +
   ");";
+const DB_DROP_ROLES_TABLE_QUERY = "drop table user_roles;";
+const DB_DROP_USERS_TABLE_QUERY = "drop table user_accounts;";
 
 watch(['./frontend/*.js'], () => {
   console.log('Client-side code modified; re-compiling ES2016 -> ES5')
@@ -67,7 +68,7 @@ gulp.task('server', () => {
 });
 
 // run via termina: gulp create_db_tables
-gulp.task('create_db_tables', () => {
+gulp.task('db_create_tables', () => {
   let tag = "SQL: ";
 
   function roleTableCallback(response) {
@@ -84,6 +85,26 @@ gulp.task('create_db_tables', () => {
   }
   // note: nest tables that rely on foreign key constraints inside of async callbacks
   db.raw(DB_CREATE_ROLES_TABLE_QUERY).then(roleTableCallback);
+});
+
+// run via termina: gulp create_db_tables
+gulp.task('db_drop_tables', () => {
+  let tag = "SQL: ";
+
+  function roleTableCallback(response) {
+    console.log(tag + DB_DROP_ROLES_TABLE_QUERY);
+    console.log(response);
+    createUserTable();
+  }
+
+  function createUserTable() {
+    db.raw(DB_DROP_USERS_TABLE_QUERY).then((userTableRessponse) => {
+      console.log(tag + DB_DROP_USERS_TABLE_QUERY);
+      console.log(userTableRessponse);
+    })
+  }
+  // note: nest tables that rely on foreign key constraints inside of async callbacks
+  db.raw(DB_DROP_ROLES_TABLE_QUERY).then(roleTableCallback);
 });
 
 gulp.task('default', ['precompile', 'server']);
