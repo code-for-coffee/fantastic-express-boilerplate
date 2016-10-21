@@ -1,19 +1,23 @@
 {
   "name": "fantastic-express-boilerplate",
-  "version": "0.1.0",
-  "description": "Express+Bookshelf Boilerplate",
-  "main": "app.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "mocha"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/code-for-coffee/fantastic-express-boilerplate.git"
-  },
-  "author": "code-for-coffee",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/code-for-coffee/fantastic-express-boilerplate/issues"
-  },
-  "homepage": "https://github.com/code-for-coffee/fantastic-express-boilerplate#readme"
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "bookshelf": "^0.10.2",
+    "chai": "^3.5.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "hbs": "~4.0.0",
+    "knex": "^0.12.6",
+    "lodash": "^4.16.4",
+    "mocha": "^3.1.2",
+    "morgan": "~1.7.0",
+    "node-sass-middleware": "0.8.0",
+    "serve-favicon": "~2.3.0"
+  }
 }
