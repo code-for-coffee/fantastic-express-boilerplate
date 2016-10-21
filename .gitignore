@@ -31,6 +31,9 @@ build/Release
 node_modules
 jspm_packages
 
+# webstorm
+.idea
+
 # Optional npm cache directory
 .npm
 
