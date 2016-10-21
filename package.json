@@ -3,21 +3,30 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "gulp",
+    "test": "mocha"
   },
   "dependencies": {
+    "babelify": "^7.3.0",
     "body-parser": "~1.15.1",
     "bookshelf": "^0.10.2",
+    "browserify": "^13.1.0",
     "chai": "^3.5.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-watch": "^4.3.10",
     "hbs": "~4.0.0",
     "knex": "^0.12.6",
     "lodash": "^4.16.4",
     "mocha": "^3.1.2",
     "morgan": "~1.7.0",
     "node-sass-middleware": "0.8.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp-nodemon": "^2.2.1"
   }
 }
