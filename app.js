@@ -5,7 +5,9 @@ const express = require('express'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser');
 
+// controllers
 let routesCtrl = require('./controllers/index');
+let rolesCtrl = require('./controllers/roles');
 let usersCtrl = require('./controllers/users');
 
 const app = express();
@@ -30,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routesCtrl);
 app.use('/users', usersCtrl);
+app.use('/roles', rolesCtrl);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -61,6 +64,5 @@ app.use((err, req, res, next) => {
     error: {}
   });
 });
-
 
 module.exports = app;
