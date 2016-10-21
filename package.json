@@ -1,0 +1,19 @@
+{
+  "name": "fantastic-express-boilerplate",
+  "version": "0.1.0",
+  "description": "Express+Bookshelf Boilerplate",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-for-coffee/fantastic-express-boilerplate.git"
+  },
+  "author": "code-for-coffee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/code-for-coffee/fantastic-express-boilerplate/issues"
+  },
+  "homepage": "https://github.com/code-for-coffee/fantastic-express-boilerplate#readme"
+}
