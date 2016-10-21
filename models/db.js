@@ -20,4 +20,6 @@ const db = require('knex')({
   }
 });
 
+console.log('db module loaded & exporting');
+
 module.exports = db;
