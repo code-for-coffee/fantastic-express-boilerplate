@@ -27,7 +27,6 @@ ctrl.get('/create', (req, res, next) => {
       name: 'testy mcTesting',
       email: 'somewhera@sdsomeplace.net',
       "password_hash": 'lolgiggles42',
-      "registration_date": new Date().toISOString().slice(0, 19).replace('T', ' '),
       role: 1
     })
     .save()

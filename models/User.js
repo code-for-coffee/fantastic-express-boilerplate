@@ -27,6 +27,7 @@ let User = bookshelf.Model.extend({
       if (!isValidEmail) reject(new Error('invalid email specified'));
       BCrypt.hash(model.attributes['password_hash'], SALT_FACTOR, (err, hash) => {
         if (err) reject(err);
+        model.set('registration_date', new Date().toISOString().slice(0, 19).replace('T', ' '));
         model.set('password_hash', hash);
         resolve(hash);
       })
