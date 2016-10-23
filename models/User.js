@@ -1,6 +1,7 @@
 const db = require('./db');
-
 const bookshelf = require('bookshelf')(db);
+const BCrypt = require('bcryptjs');
+const SALT_FACTOR = 10;
 
 let RoleModel = require('./Role');
 
@@ -9,18 +10,31 @@ let RoleModel = require('./Role');
 let User = bookshelf.Model.extend({
   tableName: 'user_accounts',
   initialize: function() {
-    this.on('creating', function(model, attrs, options) {
-      console.log(model);
-      console.log('..');
-      console.log(attrs);
+    this.on('creating', (model, attrs, options) => {
+      // console.log(model);
+      // console.log('..');
+      // console.log(attrs);
     });
+    this.on('creating', this.hashPassword, this);
   },
   role: () => {
     return this.belongsTo(RoleModel);
-  }
+  },
+  hashPassword: (model, attrs, options) => {
+    return new Promise((resolve, reject) => {
+      let pattern = /^\S+@\S+$/;
+      let isValidEmail = pattern.test(model.attributes['email']);
+      if (!isValidEmail) reject(new Error('invalid email specified'));
+      BCrypt.hash(model.attributes['password_hash'], SALT_FACTOR, (err, hash) => {
+        if (err) reject(err);
+        model.set('password_hash', hash);
+        resolve(hash);
+      })
+    })
+  },
+
 });
 
-//console.log(User);
-//console.log('model defined & exporting');
+console.log('user model defined & exporting');
 
 module.exports = User;

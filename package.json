@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "babelify": "^7.3.0",
+    "bcryptjs": "^2.3.0",
     "body-parser": "~1.15.1",
     "bookshelf": "^0.10.2",
     "browserify": "^13.1.0",
