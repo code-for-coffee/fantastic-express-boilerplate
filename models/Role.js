@@ -2,10 +2,15 @@ const db = require('./db');
 
 const bookshelf = require('bookshelf')(db);
 
+//let UserModel = require('./User');
+
 //console.log('orm loaded and ready');
 
 let Role = bookshelf.Model.extend({
-  tableName: 'user_roles'
+  tableName: 'user_roles',
+  // users: function() {
+  //   return this.hasMany(UserModel);
+  // }
 });
 
 //console.log(Role);

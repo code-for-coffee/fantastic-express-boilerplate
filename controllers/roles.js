@@ -9,13 +9,13 @@ ctrl.get('/', (req, res, next) => {
   })
 });
 
-ctrl.get('/:id', (req, res, next) => {
-  RoleModel.where({ id: req.params.id })
-    .fetch()
-    .then((model) => {
-      res.json(model);
-  })
-});
+// ctrl.get('/:id', (req, res, next) => {
+//   RoleModel.where({ id: req.params.id })
+//     .fetch()
+//     .then((model) => {
+//       res.json(model);
+//   })
+// });
 
 ctrl.post('/', (req, res, next) => {
   console.log(req.body);
@@ -40,16 +40,17 @@ ctrl.delete('/:id', (req, res, next) => {
   res.send('nyi');
 });
 
-// ctrl.get('/create', (req, res, next) => {
-//   let model = new RoleModel({
-//     name: 'administrator',
-//     description: 'Users that manage this website.'
-//   })
-//   .save()
-//   .then((model) => {
-//     res.json(model);
-//   });
-// });
+ctrl.get('/create', (req, res, next) => {
+  console.log('cud')
+  let model = new RoleModel({
+    name: 'user',
+    description: 'Plebians'
+  })
+  .save()
+  .then(function (model) {
+    res.json(model);
+  });
+});
 
 module.exports = ctrl;
 

@@ -1,3 +1,6 @@
+'use strict';
+
+
 const express = require('express');
 let ctrl = express.Router();
 let UserModel = require('../models/User');
@@ -9,15 +12,17 @@ ctrl.get('/', (req, res, next) => {
   })
 });
 
-ctrl.get('/:id', (req, res, next) => {
-  UserModel.where({ id: req.params.id })
-    .fetch()
-    .then((model) => {
-      res.json(model);
-  })
-});
+// ctrl.get('/:id', (req, res, next) => {
+//   UserModel.where({ id: req.params.id })
+//     .fetch()
+//     .then((model) => {
+//       res.json(model);
+//   })
+// });
 
 ctrl.get('/create', (req, res, next) => {
+  console.log('hi')
+  console.log(UserModel)
   let model = new UserModel({
       name: 'testy mcTesting',
       email: 'somewhere@someplace.net',
@@ -28,7 +33,6 @@ ctrl.get('/create', (req, res, next) => {
     .save()
     .then((model) => {
       console.log(model);
-      console.log('woot?')
       res.json(model);
     });
 });
