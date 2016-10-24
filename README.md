@@ -1,5 +1,7 @@
 # Fantastic Express Boilerplate (ES2015) 
 
+[![Build Status](https://travis-ci.org/code-for-coffee/fantastic-express-boilerplate.svg?branch=master)](https://travis-ci.org/code-for-coffee/fantastic-express-boilerplate)
+
 > This boilerplate is written in ES2015 and requires Node 6.x+
 
 This is a fantastic Node/Express/Bookshelf+SQL/Role-Based Authentication boilerplate. It is designed to get you up-and-running on your own project without having to setup the basic user/role models, tasks, and more.
