@@ -4,7 +4,7 @@ let chai = require('chai'),             // http://chaijs.com/api/bdd/
   should = require('chai').should(),  // http://chaijs.com/guide/styles/#should
   control = {};
 
-var Role = require('../models/Role');
+var Role = require('.././models/Role');
 
 describe('CRUD on a RoleModel', function () {
 
@@ -20,12 +20,11 @@ describe('CRUD on a RoleModel', function () {
   })
 
   it('can create a new Object', function() {
-    Role.create(control.role, function(error, role) {
-      should.not.exist(error);
-      should.exist(role);
-      should.exist(role.name);
-      should.exist(role.description);
-    });
+    let model = new Role(control.role).save().then((role) => {
+        should.exist(role);
+        should.exist(role.name);
+        should.exist(role.description);
+    })
   });
 
   it('can get a list of ALL Objects', function() {

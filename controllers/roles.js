@@ -1,6 +1,6 @@
 const express = require('express');
 let ctrl = express.Router();
-let RoleModel = require('../models/Role');
+let RoleModel = require('./models/Role');
 
 /* GET rolesCtrl listing. */
 ctrl.get('/', (req, res, next) => {
