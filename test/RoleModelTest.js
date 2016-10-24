@@ -71,10 +71,17 @@ describe('CRUD on a RoleModel', () => {
   });
 
   it('can destroy an object Object by ID', function() {
-    Role.where({ id: control.id }).destroy().then((model) => {
-      should.not.exist(model);   // this should not exist now...
-    })
+    Role.forge({id: control.id})
+      .fetch({required: true})
+      .then((role) => {
+        //console.log(role)
+        should.exist(role);
+        should.exist(role.attributes.name);
+        should.exist(role.attributes.description);
+        role.destroy().then((modelData) => {
+          should.not.exist(model.attributes.name);   // this should not exist now...
+          should.not.exist(model.attributes.description);
+        })
+      })
   });
-
-
 });
