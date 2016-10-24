@@ -9,7 +9,6 @@ let gulp  = require('gulp'),
     watch = require('gulp-watch'),
     nodemon = require('gulp-nodemon');
 
-
 /*
   Create and setup a database user first!
   mysql> create database fantastic;
@@ -19,7 +18,7 @@ let gulp  = require('gulp'),
   mysql> grant all privileges on fantastic.* to 'l33tdba'@'localhost';
  */
 const db = require('knex')({
-  client: 'mysql',
+  client: process.env.DB_ADAPTER,
   connection: {
     host : process.env.DB_HOST,
     user : process.env.DB_USR,
