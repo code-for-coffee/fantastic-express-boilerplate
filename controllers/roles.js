@@ -2,88 +2,148 @@ const express = require('express');
 let ctrl = express.Router();
 let RoleModel = require('../models/Role');
 
-/* mimic constrains set in SQL databases for req objects */
-function validateRequest(req) {
-  let name = req.body['name'],
-      body = req.body['body'];
-  if (name.length <= 80
-    && name.length > 0
-    && description.length <= 255) return true;
-  return false;
-}
-
 /* GET * listing => [] */
 ctrl.get('/', (req, res, next) => {
-  RoleModel.collection().fetch().then((models) => {
-     res.json(buildResponse(models));
-  })
+  getAllRequest(req, res, next);
 });
 
 /* GET by id => {} */
 ctrl.get('/:id', (req, res, next) => {
-  RoleModel.where({ id: req.params.id })
-    .fetch()
-    .then((model) => {
-      res.json(buildResponse(model));
-  })
+  getByIdRequest(req, res, next);
 });
 
 /* POST => {} */
 ctrl.post('/', (req, res, next) => {
-  if(validateRequest(req)) {
-    let model = new RoleModel({
-      name: 'user',
-      description: 'Plebians'
-    })
-    .save()
-    .then(function (model) {
-      res.json(buildResponse(model));
-    });
-  } else {
-    res.json(
-      sendInvalidResponseJSON('Request Body missing required properties.')
-    );
-  }
+  createRequest(res, res, next);
 });
 
 /* PUT by id => {} */
 ctrl.put('/:id', (req, res, next) => {
-  console.log(req.params.id);
-  console.log(req.body);
-  res.send('nyi');
+  updateRequest(req, res, next);
 });
 
 /* PATCH by id => {} */
 ctrl.patch('/:id', (req, res, next) => {
-  console.log(req.params.id);
-  console.log(req.body);
-  res.send('nyi');
+  updateRequest(req, res, next);
 });
 
 /* DELETE by id => {} */
 ctrl.delete('/:id', (req, res, next) => {
-  console.log(req.params.id);
-  console.log(req.body);
-  res.send('nyi');
+  deleteRequest(req, res, next);
 });
 
-/* private functions */
+/* private route functions */
+function getAllRequest(req, res, next) {
+  RoleModel.collection().fetch().then((models) => {
+    res.json(buildResponse(models));
+  })
+};
+
+function getByIdRequest(req, res, next) {
+  RoleModel.where({ id: req.params.id })
+    .fetch()
+    .then((model) => {
+    res.json(buildResponse(model));
+  })
+};
+
+function createRequest(req, res, next) {
+  if(validateCreateRequest(req)) {
+    let model = new RoleModel(
+      createViewModel(req.body)
+    )
+      .save()
+      .then(function (model) {
+        res.json(buildResponse(model));
+      });
+  } else {
+    res.json(
+      buildResponseJSON('Request Body missing required properties.')
+    );
+  }
+};
+
+function updateRequest(req, res, next) {
+  if(validateUpdateRequest(req)) {
+    RoleModel.forge({id: req.params.id})
+      .fetch({required: true})
+      .then((role) => {
+        role.save(updateViewmodel(req.body, role))
+        .then((updatedRole) => {
+        res.json(buildResponse(updatedRole));
+      })
+    });
+  } else {
+    res.json(
+      buildResponseJSON('Request Body missing required properties.')
+    );
+  }
+};
+
+function deleteRequest(req, res, next) {
+  if (req.params.id) {
+    RoleModel.forge({id: req.params.id})
+      .fetch({required: true})
+      .then((role) => {
+        res.json(buildResponseJSON(`Entry ${ req.params.id } removed from database`))
+    });
+  } else {
+    res.json(
+      buildResponseJSON('No entry matches the ID you provided (or did you provide one?)')
+    );
+  }
+
+};
+
+/* private base controller methods; will abstract later */
 function buildResponse(model) {
   if (!model) {
-    return sendInvalidResponseJSON('No models exist in database matching your request.')
+    return buildResponse('No models exist in database matching your request.')
   } else {
     return model;
   }
-}
+};
 
-function sendInvalidResponseJSON(msg) {
+function buildResponseJSON(msg) {
   return {
     'status': 400,
     data: {
       'message': msg
     }
   }
-}
+};
+
+/* mimic constrains set in SQL databases for req objects */
+function validateCreateRequest(req) {
+  let name = req.body['name'],
+    description = req.body['description'];
+  if (!name) return false;
+  if (name.length <= 80
+    && name.length > 0
+    && description.length <= 255) return true;
+  return false;
+};
+
+function validateUpdateRequest(req) {
+  let name = req.body['name'],
+    description = req.body['description'];
+  if (name || description) return true;
+  return false;
+};
+
+function createViewModel(body) {
+  return {
+    'name': body['name'],
+    'description': body['description']
+  }
+};
+
+function updateViewmodel(body, model) {
+  return {
+    'name': body ['name'] || model.get('name'),
+    'description': body['description'] || model.get('description')
+  }
+};
 
 module.exports = ctrl;
 
