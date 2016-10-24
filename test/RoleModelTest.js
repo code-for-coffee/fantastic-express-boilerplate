@@ -6,83 +6,74 @@ let chai = require('chai'),             // http://chaijs.com/api/bdd/
 
 var Role = require('.././models/Role');
 
-describe('CRUD on a RoleModel', function () {
+describe('CRUD on a RoleModel', () => {
 
-  beforeEach(function() {
+  beforeEach(() => {
     control.role = {
       name: 'Commander',
       description: 'Shepard'
     }
   });
 
-  afterEach(function() {
+  afterEach(() => {
     control.role = {};
   })
 
-  it('can create a new Object', function() {
+  it('can create a new Object', () => {
     let model = new Role(control.role).save().then((role) => {
-        should.exist(role);
-        should.exist(role.name);
-        should.exist(role.description);
+      //console.log(role)
+      should.exist(role);
+      should.exist(role.attributes.name);
+      should.exist(role.attributes.description);
+      control.id = role.attributes.id;
     })
   });
 
-  it('can get a list of ALL Objects', function() {
-    let myObjectId;
-    Role.create(control.role, function(error, role) {
-      should.not.exist(error);
-      should.exist(role);
-      should.exist(role.name);
-      should.exist(role.description);
-      control.testObjectID = role['id'];
-    });
+  it('can get a list of ALL Objects', () => {
     // now time to test for all
-    Role.find({}, function(error, roles) {
-      should.not.exist(error);
-      should.exist(roles);
-      expect(roles.length).to.be.above(0);
-    });
+    Role.collection().fetch().then((models) => {
+      should.exist(models);
+      expect(models.length).to.be.above(0);
+    })
   });
 
-  it('can get an individual Object by ID', function() {
+  it('can get an individual Object by ID', () => {
     // ok, we have the ID.. time to find it
-    Role.findById(control.testObjectID, function(error, role) {
-      should.not.exist(error);  // there better not be an error!!!!!
-      should.exist(role);      // we should get back our mongoDB object
-      should.exist(role.name);
-      should.exist(role.description);
-    });
+    //console.log(control)
+    Role.where({ id: control.id })
+      .fetch()
+      .then((model) => {
+        should.exist(model);
+        should.exist(model.attributes.name);
+        should.exist(model.attributes.description);
+    })
   });
 
-  it('can update an object Object by ID', function() {
+  it('can update an object Object by ID', () => {
     let newName = 'Spacelord';
-    Role.findByIdAndUpdate(control.testObjectID,
-      { name: newName },
-      { new: true }, // this allows us to see the updated object
-      function(error, role) {
-        should.not.exist(error);  // there better not be an error!!!!!
-        should.exist(role);      // we should get back our mongoDB object
-        should.exist(role.name);
-        should.exist(role.description);
-        expect(role.name).to.equal(newName);
+    let newDesc = 'Ruler of all';
+
+    Role.forge({id: control.id})
+      .fetch({required: true})
+      .then((role) => {
+        role.save({
+          name: newName || role.get('name'),
+          description: newDesc || role.get('description')
+        }).then((updatedModel) => {
+          console.log(updatedModel)
+          should.exist(updatedModel);
+          should.exist(updatedModel.attributes.name);
+          should.exist(updatedModel.attributes.description);
+          expect(updatedModel.attributes.name).to.equal(newName);
+          expect(updatedModel.attributes.description).to.equal(newDesc);
+        })
       });
   });
 
   it('can destroy an object Object by ID', function() {
-    // remove our object
-    Role.findByIdAndRemove(control.testObjectID,
-      function(error, role) {
-        should.not.exist(error);
-        should.exist(role);
-        should.exist(role.name);
-        should.exist(role.description);
-        expect(role.name).to.equal(newName);
-      });
-    // now search for it... it should not exist
-    // ok, we have the ID.. time to find it
-    Role.findById(control.testObjectID, function(error, role) {
-      should.not.exist(role);   // this should not exist now...
-    });
+    Role.where({ id: control.id }).destroy().then((model) => {
+      should.not.exist(model);   // this should not exist now...
+    })
   });
 
 
