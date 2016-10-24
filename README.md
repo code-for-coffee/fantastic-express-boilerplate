@@ -10,13 +10,24 @@ Git clone this repository and run `npm install && npm start`.
 
 #### Tests
 
-Tests are written with Mocha/Chai. A boilerplate CRUD test is included). To run them, you may run `npm test`.
+Tests are written with Mocha/Chai. A boilerplate CRUD test is included. To run them, you may run `npm test`.
 
 ## Behind the Scenes
 
+#### .env
+
+A `.env` file should be created at the root of your project. If this file exists, it will look for the following key/values:
+
+```bash
+DB_HOST=localhost
+DB_USR=l33tdba
+DB_PW=w0rk5pac3
+DB_NAME=fantastic
+```
+
 #### Gulp
 
-Gulp powers the base server for this boilerplate. Inside of the `gulpfile.js` are a few tasks:
+Gulp powers the base server for this boilerplate. Inside of the `gulpfile.js` are the following tasks:
 * `precompile` - Transforms `frontend/` Javascript files using Babel for ES2015 support & places the result inside of `/public/app-build.js`
 * `watch` - watches for file changes in `frontend/` & re-runs `precompile`
 * `server` - launches `node ./bin/www` using Nodemon & restarts when server-side code is recompiled
