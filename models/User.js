@@ -33,7 +33,15 @@ let User = bookshelf.Model.extend({
       })
     })
   },
-
+  comparePasswordSync: (attemptedPassword, passwordHash) => {
+    return BCrypt.compareSync(attemptedPassword, passwordHash);
+  },
+  comparePassword: (attemptedPassword, passwordHash, callback) => {
+    BCrypt.compare(attemptedPassword, passwordHash, (err, isMatch) => {
+      if (err) return callback(err);
+      else callback(err);
+    })
+  }
 });
 
 console.log('user model defined & exporting');
