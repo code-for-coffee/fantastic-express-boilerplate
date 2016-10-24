@@ -25,6 +25,7 @@ DB_HOST=localhost
 DB_USR=l33tdba
 DB_PW=w0rk5pac3
 DB_NAME=fantastic
+DB_ADAPTER=mysql      # any knex adapter works
 ```
 
 #### Gulp
@@ -50,16 +51,5 @@ Gulp powers the base server for this boilerplate. Inside of the `gulpfile.js` ar
 
 #### SQL Support
 
-This boilerplate was designed to work with SQL (sorry, NoSQL fans - just replace the `models/*.js` with whatever you need). Inside of `models/db.js`, the adapter has been specified as MySQL. Please edit this file if you need to change it.
+This boilerplate was designed to work with SQL (sorry, NoSQL fans - just replace the `models/*.js` with whatever you need). 
 
-```js
-const db = require('knex')({
-  client: 'mysql',
-  connection: {
-    host : process.env.DB_HOST,
-    user : process.env.DB_USR,
-    password : process.env.DB_PW,
-    database: process.env.DB_NAME
-  }
-});
-```
