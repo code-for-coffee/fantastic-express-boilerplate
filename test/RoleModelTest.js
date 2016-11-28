@@ -4,7 +4,7 @@ let chai = require('chai'),             // http://chaijs.com/api/bdd/
   should = require('chai').should(),  // http://chaijs.com/guide/styles/#should
   control = {};
 
-var Role = require('./Role');
+var Role = require('../app_server/models/Role');
 
 describe('CRUD on a RoleModel', () => {
 
