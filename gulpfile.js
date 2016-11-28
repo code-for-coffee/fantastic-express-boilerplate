@@ -45,13 +45,13 @@ const DB_CREATE_USERS_TABLE_QUERY = "create table user_accounts (" +
 const DB_DROP_ROLES_TABLE_QUERY = "drop table user_roles;";
 const DB_DROP_USERS_TABLE_QUERY = "drop table user_accounts;";
 
-watch(['./frontend/*.js'], () => {
+watch(['./app_client/*.js'], () => {
   console.log('Client-side code modified; re-compiling ES2016 -> ES5')
   gulp.start('precompile')
 });
 
 gulp.task('precompile', () => {
-  return browserify('./frontend/app.js')
+  return browserify('./app_client/app.js')
     .transform('babelify', {presets: ['es2015']})
     .bundle()
     .pipe(source('app-build.js'))

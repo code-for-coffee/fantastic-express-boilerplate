@@ -12,7 +12,7 @@ ctrl.get('/', (req, res, next) => {
   })
 });
 
-// ctrl.get('/:id', (req, res, next) => {
+// router.get('/:id', (req, res, next) => {
 //   UserModel.where({ id: req.params.id })
 //     .fetch()
 //     .then((model) => {

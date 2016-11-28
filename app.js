@@ -6,14 +6,14 @@ const express = require('express'),
   bodyParser = require('body-parser');
 
 // controllers
-let routesCtrl = require('./controllers/index');
-let rolesCtrl = require('./controllers/roles');
-let usersCtrl = require('./controllers/users');
+let routesCtrl = require('./app_server/controllers/index');
+let rolesCtrl = require('./app_server/routes/roles');
+let usersCtrl = require('./app_server/controllers/users');
 
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
