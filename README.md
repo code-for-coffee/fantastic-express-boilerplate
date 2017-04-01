@@ -8,11 +8,13 @@ This is a fantastic Node/Express/Bookshelf+SQL/Role-Based Authentication boilerp
 
 #### Getting Started
 
-Git clone this repository and run `npm install && npm start`.
+- Git clone this repository.
+- using _npm_: `npm install && npm start`
+- using _yarn_: `yarn install & yarn start`
 
 #### Tests
 
-Tests are written with Mocha/Chai. A boilerplate CRUD test is included. To run them, you may run `npm test`.
+Tests are written with Mocha/Chai. A boilerplate CRUD test is included. To run them, you may run `npm test` or `yarn test`.
 
 ## Behind the Scenes
 
@@ -48,8 +50,29 @@ Gulp powers the base server for this boilerplate. Inside of the `gulpfile.js` ar
 * `test/` contains Mocha/Chai unit tests
 * `views/` contain Handlebars views
 
+#### eslint / editorconfig
+
+This project comes with a small eslint and editorconfig setup. The following rules are applied:
+
+- ES2015 syntax that is supported by Node is permitted. This _does not include ES2015 Modules_ (Harmony). Client side code in this project will support it in a future patch.
+- Single quotes must be used
+- 2 space indentations are required (not four you crazy people)
+- React/JSX support
+- Write files as utf-8
 
 #### SQL Support
+
+Install MySQL on your dev machine:
+
+```
+brew install mysql
+```
+
+Next, start the server (you may need to do this in a new terminal shell due to bash profilem changes):
+
+```
+mysql.server start
+```
 
 This boilerplate was designed to work with SQL (sorry, NoSQL fans - just replace the `models/*.js` with whatever you need). 
 
