@@ -9,8 +9,19 @@ This is a fantastic Node/Express/Bookshelf+SQL/Role-Based Authentication boilerp
 #### Getting Started
 
 - Git clone this repository.
-- using _npm_: `npm install && npm start`
-- using _yarn_: `yarn install & yarn start`
+- using _npm_: `npm run init`
+- using _yarn_: `yarn run init`
+- Your application will then install the dependencies required && setup your database tables. It will then run the application and launch the server.
+
+#### Run the server whenever
+
+- using _npm_: `npm start`
+- using _yarn_: `yarn start`
+
+#### Database Commands
+
+- `yarn run db-setup` / `npm run db-setup` will create your database tables as specified in the `Gulpfile.js`.
+- `yarn run db-drop` / `npm run db-drop`  will drop your database tables as specified in `Gulpfile.js`.
 
 #### Tests
 
@@ -29,16 +40,6 @@ DB_PW=w0rk5pac3
 DB_NAME=fantastic
 DB_ADAPTER=mysql      # any knex adapter works
 ```
-
-#### Gulp
-
-Gulp powers the base server for this boilerplate. Inside of the `gulpfile.js` are the following tasks:
-* `precompile` - Transforms `app_client/` Javascript files using Babel for ES2015 support & places the result inside of `/public/app-build.js`
-* `watch` - watches for file changes in `app_client/` & re-runs `precompile`
-* `server` - launches `node ./bin/www` using Nodemon & restarts when server-side code is recompiled
-* `create_db_tables` - creates the SQL tables specified in the `const` variables in the gulfpile. (Only ran externally via `gulp create_db_tables`)
-* `drop_db_tables` - drops the SQL tables specified in the `const` variables in the gulpfile. (Only ran externally via `gulp drop_db_tables`)
-
 
 #### Folder Structure & Organization
 
@@ -76,3 +77,11 @@ mysql.server start
 
 This boilerplate was designed to work with SQL (sorry, NoSQL fans - just replace the `models/*.js` with whatever you need). 
 
+#### Gulp
+
+Gulp powers the base server for this boilerplate. Inside of the `gulpfile.js` are the following tasks:
+* `precompile` - Transforms `app_client/` Javascript files using Babel for ES2015 support & places the result inside of `/public/app-build.js`
+* `watch` - watches for file changes in `app_client/` & re-runs `precompile`
+* `server` - launches `node ./bin/www` using Nodemon & restarts when server-side code is recompiled
+* `create_db_tables` - creates the SQL tables specified in the `const` variables in the gulfpile. (Only ran externally via `gulp create_db_tables`)
+* `drop_db_tables` - drops the SQL tables specified in the `const` variables in the gulpfile. (Only ran externally via `gulp drop_db_tables`)

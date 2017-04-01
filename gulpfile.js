@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const gulp  = require('gulp'),
   browserify  = require('browserify'),
   babelify  = require('babelify'),
@@ -76,6 +78,7 @@ gulp.task('db_create_tables', () => {
     db.raw(DB_CREATE_USERS_TABLE_QUERY).then((userTableRessponse) => {
       console.log(tag + DB_CREATE_USERS_TABLE_QUERY);
       console.log(userTableRessponse);
+      process.exit(0);
     })
   }
   // note: nest tables that rely on foreign key constraints inside of async callbacks
@@ -96,6 +99,7 @@ gulp.task('db_drop_tables', () => {
     db.raw(DB_DROP_USERS_TABLE_QUERY).then((userTableRessponse) => {
       console.log(tag + DB_DROP_USERS_TABLE_QUERY);
       console.log(userTableRessponse);
+      process.exit(0);
     })
   }
   // note: nest tables that rely on foreign key constraints inside of async callbacks

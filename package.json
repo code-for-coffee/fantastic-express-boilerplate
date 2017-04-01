@@ -1,10 +1,13 @@
 {
   "name": "fantastic-express-boilerplate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "start": "gulp",
-    "test": "mocha"
+    "test": "mocha",
+    "db-setup": "gulp db_create_tables",
+    "db-drop": "gulp db_drop_tables",
+    "init": "yarn install && yarn run db-setup && yarn start"
   },
   "dependencies": {
     "babelify": "^7.3.0",
