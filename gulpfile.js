@@ -1,13 +1,9 @@
-'use strict'
-
-require('dotenv').config();
-
-let gulp  = require('gulp'),
-    browserify  = require('browserify'),
-    babelify  = require('babelify'),
-    source  = require('vinyl-source-stream'),
-    watch = require('gulp-watch'),
-    nodemon = require('gulp-nodemon');
+const gulp  = require('gulp'),
+  browserify  = require('browserify'),
+  babelify  = require('babelify'),
+  source  = require('vinyl-source-stream'),
+  watch = require('gulp-watch'),
+  nodemon = require('gulp-nodemon');
 
 /*
   Create and setup a database user first!
@@ -27,23 +23,23 @@ const db = require('knex')({
   }
 });
 
-const DB_CREATE_ROLES_TABLE_QUERY = "create table user_roles (" +
-  "id int not null auto_increment," +
-  "name varchar(80) not null," +
-  "description varchar(255)," +
-  "primary key (id)" +
-  ");";
-const DB_CREATE_USERS_TABLE_QUERY = "create table user_accounts (" +
-  "id int not null auto_increment," +
-  "name varchar(80) not null," +
-  "email varchar(255) not null," +
-  "password_hash char(60) BINARY not null," +
-  "registration_date date not null," +
-  "role int not null references user_roles(id)," +
-  "primary key (id)" +
-  ");";
-const DB_DROP_ROLES_TABLE_QUERY = "drop table user_roles;";
-const DB_DROP_USERS_TABLE_QUERY = "drop table user_accounts;";
+const DB_CREATE_ROLES_TABLE_QUERY = 'create table user_roles (' +
+  'id int not null auto_increment,' +
+  'name varchar(80) not null,' +
+  'description varchar(255),' +
+  'primary key (id)' +
+  ');';
+const DB_CREATE_USERS_TABLE_QUERY = 'create table user_accounts (' +
+  'id int not null auto_increment,' +
+  'name varchar(80) not null,' +
+  'email varchar(255) not null,' +
+  'password_hash char(60) BINARY not null,' +
+  'registration_date date not null,' +
+  'role int not null references user_roles(id),' +
+  'primary key (id)' +
+  ');';
+const DB_DROP_ROLES_TABLE_QUERY = 'drop table user_roles;';
+const DB_DROP_USERS_TABLE_QUERY = 'drop table user_accounts;';
 
 watch(['./app_client/*.js'], () => {
   console.log('Client-side code modified; re-compiling ES2016 -> ES5')
@@ -68,7 +64,7 @@ gulp.task('server', () => {
 
 // run via termina: gulp create_db_tables
 gulp.task('db_create_tables', () => {
-  let tag = "SQL: ";
+  let tag = 'SQL: ';
 
   function roleTableCallback(response) {
     console.log(tag + DB_CREATE_ROLES_TABLE_QUERY);
@@ -88,7 +84,7 @@ gulp.task('db_create_tables', () => {
 
 // run via termina: gulp create_db_tables
 gulp.task('db_drop_tables', () => {
-  let tag = "SQL: ";
+  let tag = 'SQL: ';
 
   function roleTableCallback(response) {
     console.log(tag + DB_DROP_ROLES_TABLE_QUERY);
