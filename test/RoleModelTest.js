@@ -46,7 +46,7 @@ describe('CRUD on a RoleModel', () => {
         should.exist(model);
         should.exist(model.attributes.name);
         should.exist(model.attributes.description);
-    })
+      })
   });
 
   it('can update an object Object by ID', () => {

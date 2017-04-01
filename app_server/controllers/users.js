@@ -24,11 +24,11 @@ ctrl.get('/create', (req, res, next) => {
   console.log('hi')
   console.log(UserModel)
   let model = new UserModel({
-      name: 'testy mcTesting',
-      email: 'somewhera@sdsomeplace.net',
-      "password_hash": 'lolgiggles42',
-      role: 1
-    })
+    name: 'testy mcTesting',
+    email: 'somewhera@sdsomeplace.net',
+    'password_hash': 'lolgiggles42',
+    role: 1
+  })
     .save()
     .then((model) => {
       console.log(model);
