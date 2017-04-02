@@ -1,7 +1,10 @@
 /**
- * Created by codeforcoffee on 11/27/16.
+ * @constant express
  */
 const express = require('express');
+/**
+ * @constant {@link RolesController}
+ */
 const RoleController = require('../controllers/roles');
 
 let router = express.Router();
@@ -37,4 +40,7 @@ router.delete('/:id', (req, res, next) => {
   ctrl.deleteRequest(req, res, next);
 });
 
+/**
+ * @exports RolesRouter
+ */
 module.exports = router;

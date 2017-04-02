@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 
 /**
- * Module dependencies.
+ * @private {@link app} 
  */
-
 var app = require('../app');
 var debug = require('debug')('fantastic-express-boilerplate:server');
+/**
+ * @private {@link http} Node module.
+ */
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 

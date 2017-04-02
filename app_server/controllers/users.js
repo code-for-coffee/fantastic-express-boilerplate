@@ -1,5 +1,3 @@
-'use strict';
-
 
 const express = require('express');
 let ctrl = express.Router();

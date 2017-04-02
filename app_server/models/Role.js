@@ -1,3 +1,6 @@
+/**
+ * @constant {@link DatabaseContext}
+ */
 const db = require('./db');
 
 const bookshelf = require('bookshelf')(db);
